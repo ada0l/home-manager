@@ -1,0 +1,95 @@
+[language-server.pyright-with-detect-venv]
+command = "pyright-with-detect-venv"
+args = []
+config = {}
+
+[[language]]
+name = "python"
+auto-format = true
+language-servers = ["pyright-with-detect-venv"]
+formatter = { command = "sh", args = ["-c", "black --quiet --line-length=79 - | isort -"] }
+
+[[language]]
+name = "c"
+auto-format = true
+indent = {tab-width = 2, unit = "  "}
+
+[language-server.clangd-cpp]
+command = "clangd"
+args = ["--background-index"]
+config = { "clangd.fallbackFlags" = [ "-std=c++17", "--background-index" ] }
+
+[[language]]
+name = "cpp"
+auto-format = true
+indent = {tab-width = 2, unit = "  "}
+language-servers = ["clangd-cpp"]
+
+[[language]]
+name = "javascript"
+formatter = { command = 'prettier', args = ["--parser", "javascript"] }
+auto-format = true
+
+[[language]]
+name = "typescript"
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+auto-format = true
+
+[[language]]
+name = "sql"
+scope = "source.sql"
+file-types = ["sql"]
+auto-format = true
+comment-token = "--"
+indent = { tab-width = 4, unit = "    " }
+
+[[grammar]]
+name = "toml"
+source = { git = "https://github.com/ikatyang/tree-sitter-toml", rev = "7cff70bbcbbc62001b465603ca1ea88edd668704" }
+
+[[language]]
+name = "fish"
+scope = "source.fish"
+injection-regex = "fish"
+file-types = ["fish"]
+shebangs = ["fish"]
+roots = []
+comment-token = "#"
+indent = { tab-width = 4, unit = "    " }
+
+[[grammar]]
+name = "fish"
+source = { git = "https://github.com/ram02z/tree-sitter-fish", rev = "04e54ab6585dfd4fee6ddfe5849af56f101b6d4f" }
+
+[language-server.vscode-json-language-server]
+command = "vscode-json-language-server"
+args = ["--stdio"]
+config = { "provideFormatter" = true }
+
+[[language]]
+name = "json"
+scope = "source.json"
+injection-regex = "json"
+file-types = ["json"]
+roots = []
+language-servers = ["vscode-json-language-server"]
+auto-format = true
+indent = { tab-width = 2, unit = "  " }
+
+[[grammar]]
+name = "json"
+source = { git = "https://github.com/tree-sitter/tree-sitter-json", rev = "65bceef69c3b0f24c0b19ce67d79f57c96e90fcb" }
+
+[[language]]
+name = "markdown"
+scope = "source.md"
+injection-regex = "md|markdown"
+file-types = ["md"]
+roots = []
+indent = { tab-width = 2, unit = "  " }
+soft-wrap = { enable = true, wrap-at-text-width = true}
+
+[[grammar]]
+name = "markdown"
+source = { git = "https://github.com/MDeiml/tree-sitter-markdown", rev = "ad8c32917a16dfbb387d1da567bf0c3fb6fffde2" }
+
