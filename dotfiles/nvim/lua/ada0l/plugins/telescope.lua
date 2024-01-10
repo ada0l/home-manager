@@ -15,6 +15,7 @@ return {
       { '<leader>j', ':Telescope jumplist<CR>', desc = '[Telescope] Resume Picker' },
       { '<leader>S', ':Telescope lsp_dynamic_workspace_symbols<CR>', desc = '[Telescope] Search symbol' },
       { '<leader>s', ':Telescope lsp_document_symbols<CR>', desc = '[Telescope] Search symbol in workspace' },
+      { '<leader>gs', ':Telescope git_status<CR>', desc = '[Git] status' },
       { 'gd', ':Telescope lsp_definitions<CR>', desc = '[LSP] Denifition' },
       { 'gD', ':Telescope lsp_type_definitions<CR>', desc = '[LSP] Type denifitions' },
       { 'gD', ':Telescope lsp_type_definitions<CR>', desc = '[LSP] Type denifitions' },
@@ -55,6 +56,13 @@ return {
           },
         },
         pickers = {
+          git_status = {
+            mappings = {
+              i = {
+                ['<c-a>'] = actions.git_staging_toggle,
+              },
+            },
+          },
           live_grep = {
             file_ignore_patterns = {
               'yarn.lock',
