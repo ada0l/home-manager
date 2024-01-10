@@ -76,21 +76,18 @@ return {
       local lsp = require('lsp-zero')
       local lsp_config = require('lspconfig')
       local cmp = require('cmp')
+      local cmp_action = require('lsp-zero').cmp_action()
       local mason = require('mason')
       local mason_lspconfig = require('mason-lspconfig')
 
       lsp.preset('recommended')
 
-      local cmp_select = { behavior = cmp.SelectBehavior.Select }
-      local cmp_mappings = lsp.defaults.cmp_mappings({
-        ['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
-        ['<Tab>'] = cmp.mapping.select_next_item(cmp_select),
-        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-        ['<C-Space>'] = cmp.mapping.complete(),
+      cmp.setup({
+        mapping = cmp.mapping.preset.insert({
+          ['<Tab>'] = cmp_action.luasnip_supertab(),
+          ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
+        }),
       })
-
-      ---@diagnostic disable-next-line: missing-fields
-      cmp.setup({ mapping = cmp_mappings })
 
       ---@diagnostic disable-next-line: redundant-parameter
       lsp.set_preferences({
