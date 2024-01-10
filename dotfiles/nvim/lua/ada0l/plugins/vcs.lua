@@ -2,6 +2,9 @@ return {
   {
     'tpope/vim-fugitive',
     cmd = 'Git',
+    init = function()
+      vim.cmd([[cab git Git]])
+    end,
   },
   {
     'kdheepak/lazygit.nvim',
