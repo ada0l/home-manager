@@ -1,15 +1,16 @@
 return {
   {
     'stevearc/aerial.nvim',
+    cmd = { 'AerialToggle' },
     opts = function()
       local opts = {
         attach_mode = 'global',
         backends = { 'lsp', 'treesitter', 'markdown', 'man' },
         show_guides = true,
-        open_automatic = true,
+        open_automatic = false,
         layout = {
-          max_width = { 40, 0.2 },
-          resize_to_content = false,
+          min_width = { 40, 0.2 },
+          resize_to_content = true,
           win_opts = {
             winhl = 'Normal:NormalFloat,FloatBorder:NormalFloat,SignColumn:SignColumnSB',
             signcolumn = 'yes',

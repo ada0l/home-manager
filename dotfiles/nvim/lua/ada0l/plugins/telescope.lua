@@ -12,8 +12,14 @@ return {
       { '<leader>b', ':Telescope buffers<CR>', desc = '[Telescope] Search buffer' },
       { '<leader>d', ':Telescope diagnostic<CR>', desc = '[Telescope] Search diagnostics' },
       { "<leader>'", ':Telescope resume<CR>', desc = '[Telescope] Resume Picker' },
+      { '<leader>j', ':Telescope jumplist<CR>', desc = '[Telescope] Resume Picker' },
       { '<leader>S', ':Telescope lsp_dynamic_workspace_symbols<CR>', desc = '[Telescope] Search symbol' },
       { '<leader>s', ':Telescope lsp_document_symbols<CR>', desc = '[Telescope] Search symbol in workspace' },
+      { 'gd', ':Telescope lsp_definitions<CR>', desc = '[LSP] Denifition' },
+      { 'gD', ':Telescope lsp_type_definitions<CR>', desc = '[LSP] Type denifitions' },
+      { 'gD', ':Telescope lsp_type_definitions<CR>', desc = '[LSP] Type denifitions' },
+      { 'gr', ':Telescope lsp_references<CR>', desc = '[LSP] References' },
+      { 'gi', ':Telescope lsp_implementations<CR>', desc = '[LSP] Implementations' },
     },
     tag = '0.1.5',
     config = function(_, opts)
@@ -23,46 +29,46 @@ return {
       local actions = require('telescope.actions')
       return {
         defaults = {
-          vimgrep_arguments = {
-            'rg',
-            '--no-config',
-            '--no-ignore',
-            '--color=never',
-            '--with-filename',
-            '--line-number',
-            '--column',
-            '--smart-case',
-            '--hidden',
-            '-g=!.git',
-            '-g=!.ccls-cache',
-            '-g=!node_modules',
-            '-g=!lazy-lock.json',
-            '-g=!venv',
-            '-g=!__pycache__',
-            '-g=!dist',
-          },
+          layout_strategy = 'flex',
           layout_config = {
-            vertical = { width = 1 },
+            horizontal = {
+              width = 0.9,
+              height = 0.9,
+            },
+            vertical = {
+              width = 0.9,
+              height = 0.9,
+            },
+          },
+          mappings = {
+            i = {
+              ['<c-k>'] = actions.move_selection_previous,
+              ['<c-h>'] = actions.results_scrolling_up,
+              ['<c-j>'] = actions.move_selection_next,
+              ['<c-l>'] = actions.results_scrolling_down,
+            },
           },
           file_ignore_patterns = {
             'node_modules',
             'build',
             'dist',
-            'yarn.lock',
-            'package-lock.json',
           },
         },
         pickers = {
+          live_grep = {
+            file_ignore_patterns = {
+              'yarn.lock',
+              'package-lock.json',
+              'package.json',
+              'tsconfig.json',
+            },
+          },
           buffers = {
             mappings = {
               i = {
                 ['<c-d>'] = actions.delete_buffer + actions.move_to_top,
               },
             },
-            -- previewer = false,
-          },
-          find_files = {
-            -- previewer = false,
           },
         },
       }

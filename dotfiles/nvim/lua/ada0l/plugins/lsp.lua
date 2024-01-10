@@ -28,23 +28,6 @@ local function on_attach(_, bufnr)
     vim.diagnostic.setloclist({ severity = vim.diagnostic.severity.ERROR })
   end, opts)
 
-  -- go to
-  vim.keymap.set('n', 'gd', function()
-    vim.lsp.buf.definition()
-  end, opts)
-  vim.keymap.set('n', 'gD', function()
-    vim.lsp.buf.declaration()
-  end, opts)
-  vim.keymap.set('n', 'gy', function()
-    vim.lsp.buf.type_definition()
-  end, opts)
-  vim.keymap.set('n', 'gr', function()
-    vim.lsp.buf.references()
-  end, opts)
-  vim.keymap.set('n', 'gi', function()
-    vim.lsp.buf.implementation()
-  end, opts)
-
   -- signature
   vim.keymap.set('n', '<leader>k', function()
     vim.lsp.buf.hover()

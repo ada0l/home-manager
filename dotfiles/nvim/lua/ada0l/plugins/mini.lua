@@ -137,7 +137,6 @@ return {
     },
     config = function(_, opts)
       require('mini.jump2d').setup(opts)
-      vim.cmd([[au FileType * if index(['qf', 'minifiles'], &ft) < 0 | let b:minijump2d_disable=v:true | endif]])
     end,
   },
   {
@@ -266,8 +265,8 @@ return {
     keys = {
       { 'ms', mode = { 'x', 'v', 'n' }, desc = '[Match] Surround add' },
       { 'md', mode = { 'n', 'x', 'v' }, desc = '[Match] Surround delete' },
-      { 'mr', mode = { 'n' },           desc = '[Match] Surround replace' },
-      { 'mf', mode = { 'n' },           desc = '[Match] Surround find' },
+      { 'mr', mode = { 'n' }, desc = '[Match] Surround replace' },
+      { 'mf', mode = { 'n' }, desc = '[Match] Surround find' },
     },
     opts = {
       mappings = {
