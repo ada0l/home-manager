@@ -32,9 +32,7 @@ function M.map(mode, lhs, rhs, opts)
     noremap = true,
     silent = false,
   }
-  if opts then
-    options = vim.tbl_deep_extend('force', options, opts)
-  end
+  if opts then options = vim.tbl_deep_extend('force', options, opts) end
   vim.keymap.set(mode, lhs, rhs, options)
 end
 
@@ -58,8 +56,8 @@ function M._get_python_venv()
     return cwd .. '/venv/bin/python'
   elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
     return cwd .. '/.venv/bin/python'
-  elseif vim.fn.executable('poetry') == 1 and M.file_exists(cwd .. '/pyproject.toml') then
-    local cmd = 'poetry env info -p'
+  elseif M.file_exists(cwd .. '/pyproject.toml') then
+    local cmd = 'python -m poetry env info -p'
     local handle = io.popen(cmd)
     ---@diagnostic disable-next-line: need-check-nil
     local result = handle:read('*a')
@@ -104,15 +102,9 @@ function M.goto_window(direction)
   -- local scrolloff = vim.api.nvim_get_option('scrolloff')
   direction = direction or 'center'
   local get_line_funcs = {
-    top = function()
-      return topline + scrolloff
-    end,
-    center = function()
-      return math.min(math.floor(topline / 2 + topline / 2 + height / 2), vim.fn.line('$'))
-    end,
-    bottom = function()
-      return topline + (height - 1) - scrolloff
-    end,
+    top = function() return topline + scrolloff end,
+    center = function() return math.min(math.floor(topline / 2 + topline / 2 + height / 2), vim.fn.line('$')) end,
+    bottom = function() return topline + (height - 1) - scrolloff end,
   }
   vim.api.nvim_command(string.format('%s', get_line_funcs[direction]()))
 end

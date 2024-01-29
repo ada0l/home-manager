@@ -13,13 +13,12 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local ok, lazy = pcall(require, 'lazy')
-if not ok then
-  return
-end
+if not ok then return end
 
 lazy.setup({
   spec = {
     { import = 'ada0l.plugins' },
+    -- { import = 'ada0l.plugins_' },
   },
   install = {},
   change_detection = {
@@ -33,13 +32,13 @@ lazy.setup({
     reset_packpath = true,
     rtp = {
       disabled_plugins = {
-        'gzip',
-        'netrwPlugin',
-        'rplugin',
-        'tarPlugin',
-        'tohtml',
-        'tutor',
-        'zipPlugin',
+        -- 'gzip',
+        -- 'netrwPlugin',
+        -- 'rplugin',
+        -- 'tarPlugin',
+        -- 'tohtml',
+        -- 'tutor',
+        -- 'zipPlugin',
       },
     },
   },

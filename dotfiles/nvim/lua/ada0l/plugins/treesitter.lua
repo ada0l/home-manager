@@ -7,10 +7,10 @@ return {
     dependencies = {
       {
         'nvim-treesitter/nvim-treesitter-textobjects',
-        config = function()
+        config = function(a, b, c)
           local ts_repeat_move = require('nvim-treesitter.textobjects.repeatable_move')
           vim.keymap.set({ 'n', 'x', 'o' }, ';', ts_repeat_move.repeat_last_move_next)
-          vim.keymap.set({ 'n', 'x', 'o' }, ',', ts_repeat_move.repeat_last_move_previous)
+          --vim.keymap.set({ 'n', 'x', 'o' }, ',', ts_repeat_move.repeat_last_move_previous)
         end,
       },
       {
@@ -18,7 +18,7 @@ return {
         cmd = { 'TSPlaygroundToggle' },
       },
     },
-    --tag = 'v0.9.0',
+    tag = 'v0.9.0',
     opts = {
       indent = { enable = true },
       incremental_selection = {
@@ -120,14 +120,12 @@ return {
       install = {
         prefer_git = false,
       },
-      -- auto_install = true,
+      auto_install = true,
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = { 'markdown' },
       },
     },
-    config = function(_, opts)
-      require('nvim-treesitter.configs').setup(opts)
-    end,
+    config = function(_, opts) require('nvim-treesitter.configs').setup(opts) end,
   },
 }

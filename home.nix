@@ -7,27 +7,69 @@
   home.stateVersion = "23.11";
 
   home.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    # docker
+    colima
+    docker
+
+    # misc
     curl
     wget
     htop
+    zip
+    unzip
+    git
+    ranger
     fish
     zellij
-    git
-    docker
     eza
-  
+    
+    # search and replacing
+    ripgrep
+    fd
+    sd
+ 
+    # editors
     neovim
     helix
 
     lazydocker
     lazygit
-    
-    gnumake
-    cmake
-    python3
+
+    # control version of languages
+    asdf-vm
+
+    # nix
+    nil
+    # golang
+    libcap
+    go
+    gopls
+    gcc
+    # rust
+    cargo
+    rustc
+    rustfmt
+    python
+    conda
+    nodePackages.pyright
+    isort
+    black
+    # lua
+    lua-language-server
+    stylua
+    # javascript
+    prettierd
     typescript
     nodejs_20
+    # make
+    gnumake
+    cmake
   ];
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
 
   home.file = {
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink dotfiles/nvim;
@@ -35,14 +77,30 @@
     ".config/helix".source = config.lib.file.mkOutOfStoreSymlink dotfiles/helix;
   };
 
+  programs.home-manager.enable = true;
+
   programs.git = {
     enable = true;
     userName = "ada0l";
     userEmail = "andreika.varfolomeev@yandex.ru";
+    extraConfig = {
+      init = {
+        defaultbranch = "main";
+      };
+    };
+    aliases = {
+        s = "status";
+        c = "commit";
+        ch = "checkout";
+    };
   };
 
   programs.fish = {
     enable = true;
+    shellInit = ''
+      source "$HOME/.nix-profile/etc/profile.d/nix.fish"
+      source "$HOME/.nix-profile/share/asdf-vm/asdf.fish"
+    '';
     shellAliases = {
       ls = "exa --color=always --icons --group-directories-first";
       la = "exa --color=always --icons --group-directories-first --all";
@@ -60,5 +118,4 @@
     };
   };
 
-  programs.home-manager.enable = true;
 }
