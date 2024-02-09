@@ -2,7 +2,7 @@ return {
   {
     'nvim-pack/nvim-spectre',
     keys = {
-      { '<leader>\\', '<cmd>lua require("spectre").toggle()<cr>', desc = '[Git] Open Lazy' },
+      { '<leader>\\', '<cmd>lua require("spectre").toggle()<cr>', desc = 'Replacing' },
     },
     opts = {
       color_devicons = true,

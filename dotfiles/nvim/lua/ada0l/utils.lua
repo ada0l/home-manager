@@ -57,13 +57,13 @@ function M._get_python_venv()
   elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
     return cwd .. '/.venv/bin/python'
   elseif M.file_exists(cwd .. '/pyproject.toml') then
-    local cmd = 'python -m poetry env info -p'
+    local cmd = 'poetry env info -p'
     local handle = io.popen(cmd)
     ---@diagnostic disable-next-line: need-check-nil
     local result = handle:read('*a')
     ---@diagnostic disable-next-line: need-check-nil
     local status = { handle:close() }
-    if status[3] ~= 0 then
+    if status[3] ~= nil and status[3] ~= 0 then
       print('poetry status is not zero. ' .. result .. ' ' .. status[3])
       return vim.fn.system('which python')
     end

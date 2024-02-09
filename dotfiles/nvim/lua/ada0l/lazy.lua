@@ -18,7 +18,6 @@ if not ok then return end
 lazy.setup({
   spec = {
     { import = 'ada0l.plugins' },
-    -- { import = 'ada0l.plugins_' },
   },
   install = {},
   change_detection = {
@@ -32,13 +31,13 @@ lazy.setup({
     reset_packpath = true,
     rtp = {
       disabled_plugins = {
-        -- 'gzip',
-        -- 'netrwPlugin',
-        -- 'rplugin',
-        -- 'tarPlugin',
-        -- 'tohtml',
-        -- 'tutor',
-        -- 'zipPlugin',
+        'gzip',
+        'netrwPlugin',
+        'rplugin',
+        'tarPlugin',
+        'tohtml',
+        'tutor',
+        'zipPlugin',
       },
     },
   },
@@ -46,4 +45,4 @@ lazy.setup({
 
 local map = require('ada0l.utils').map
 
-map('n', '<leader>L', '<cmd>Lazy<cr>', { desc = '[Lazy] Open' })
+map('n', '<leader>L', '<cmd>Lazy<cr>', { desc = 'Lazy' })

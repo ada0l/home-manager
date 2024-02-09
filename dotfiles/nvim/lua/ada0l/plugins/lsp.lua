@@ -7,19 +7,19 @@ local function on_attach(_, bufnr)
   local opts = { buffer = bufnr, remap = false }
 
   -- diagnostic
-  vim.keymap.set('n', '[d', function() vim.diagnostic.goto_next() end, vim.tbl_extend('keep', opts, { desc = 'Next diagnostic' }))
-  vim.keymap.set('n', ']d', function() vim.diagnostic.goto_prev() end, vim.tbl_extend('keep', opts, { desc = 'Prev diagnostic' }))
-  vim.keymap.set('n', '[e', function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, vim.tbl_extend('keep', opts, { desc = 'Next error' }))
-  vim.keymap.set('n', ']e', function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end, vim.tbl_extend('keep', opts, { desc = 'Prev error' }))
+  vim.keymap.set('n', ']d', function() vim.diagnostic.goto_next() end, vim.tbl_extend('keep', opts, { desc = 'Next diagnostic' }))
+  vim.keymap.set('n', '[d', function() vim.diagnostic.goto_prev() end, vim.tbl_extend('keep', opts, { desc = 'Prev diagnostic' }))
+  vim.keymap.set('n', ']e', function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, vim.tbl_extend('keep', opts, { desc = 'Next error' }))
+  vim.keymap.set('n', '[e', function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end, vim.tbl_extend('keep', opts, { desc = 'Prev error' }))
   vim.keymap.set('n', '<leader>e', function() vim.diagnostic.setloclist({ severity = vim.diagnostic.severity.ERROR }) end, vim.tbl_extend('keep', opts, { desc = 'Errors' }))
 
   -- signature
-  vim.keymap.set('n', '<leader>k', function() vim.lsp.buf.hover() end, vim.tbl_extend('keep', opts, { desc = '[LSP] Hover' }))
-  vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end, vim.tbl_extend('keep', opts, { desc = '[LSP] Signature' }))
+  vim.keymap.set('n', '<leader>k', function() vim.lsp.buf.hover() end, vim.tbl_extend('keep', opts, { desc = 'Hover' }))
+  vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end, vim.tbl_extend('keep', opts, { desc = 'Signature' }))
 
   -- actions
-  vim.keymap.set('n', '<leader>a', function() vim.lsp.buf.code_action() end, vim.tbl_extend('keep', opts, { desc = '[LSP] Code action' }))
-  vim.keymap.set('n', '<leader>r', function() vim.lsp.buf.rename() end, vim.tbl_extend('keep', opts, { desc = '[LSP] Rename' }))
+  vim.keymap.set('n', '<leader>a', function() vim.lsp.buf.code_action() end, vim.tbl_extend('keep', opts, { desc = 'Code action' }))
+  vim.keymap.set('n', '<leader>r', function() vim.lsp.buf.rename() end, vim.tbl_extend('keep', opts, { desc = 'Rename' }))
   vim.keymap.set('n', '=', function() vim.lsp.buf.format({ async = true }) end, opts)
 end
 
@@ -61,7 +61,7 @@ return {
       lsp_config.lua_ls.setup({ settings = { Lua = { runtime = { version = 'LuaJIT' } } } })
       lsp_config.pyright.setup({
         settings = { python = {} },
-        before_init = function(_, config) config.settings.python.pythonPath = require('ada0l.utils').get_python_venv({ force = false }) end,
+        before_init = function(_, config) config.settings.python.pythonPath = require('ada0l.utils').get_python_venv({ force = true }) end,
       })
       lsp_config.gopls.setup({
         on_attach = on_attach,

@@ -1,5 +1,4 @@
 vim.g.mapleader = ' '
-
 vim.opt.compatible = false
 
 vim.opt.fileformat = 'unix'
@@ -25,7 +24,7 @@ vim.opt.number = true
 vim.opt.wrap = false
 vim.opt.signcolumn = 'yes'
 vim.opt.termguicolors = true
-vim.opt.cmdheight = 1
+vim.opt.cmdheight = 2
 vim.opt.laststatus = 3
 
 vim.opt.inccommand = 'split'
@@ -36,10 +35,11 @@ vim.opt.smartcase = true
 vim.opt.showmatch = true
 vim.opt.magic = true
 
+vim.opt.foldmethod = 'marker'
+
 vim.opt.autoread = true
 
 vim.opt.completeopt = { 'menu', 'menuone', 'preview', 'noselect' }
-vim.o.completeopt = 'menuone,noinsert,noselect'
 vim.opt.shortmess = vim.opt.shortmess + { c = true }
 vim.opt.pumheight = 10
 vim.opt.pumblend = 10
@@ -55,3 +55,5 @@ vim.opt.smartindent = true
 
 vim.opt.errorbells = false
 vim.opt.visualbell = true
+
+vim.opt.background = 'light'

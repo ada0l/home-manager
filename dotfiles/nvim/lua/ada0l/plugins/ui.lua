@@ -5,6 +5,19 @@ return {
     dependencies = { 'tjdevries/colorbuddy.nvim' },
     init = function() require('colorbuddy').colorscheme('cobalt2') end,
   },
+  -- { 'ellisonleao/gruvbox.nvim', priority = 1000, init = function() vim.cmd([[colorscheme gruvbox]]) end, opts = { contrast = 'light' } },
+  -- {
+  --   'Verf/deepwhite.nvim',
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function() vim.cmd([[colorscheme deepwhite]]) end,
+  -- },
+  -- {
+  --   'lourenci/github-colors',
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function() vim.cmd.colorscheme('github-colors') end,
+  -- },
   {
     'echasnovski/mini.statusline',
     dependencies = {
