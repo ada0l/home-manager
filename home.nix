@@ -2,12 +2,12 @@
 
 {
   home.username = "ada0l";
-  home.homeDirectory = "/home/ada0l";
+  home.homeDirectory = "/Users/ada0l";
 
   home.stateVersion = "23.11";
 
   home.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    neofetch
     # docker
     colima
     docker
@@ -23,6 +23,7 @@
     fish
     zellij
     eza
+    jq
     
     # search and replacing
     ripgrep
@@ -42,7 +43,6 @@
     # nix
     nil
     # golang
-    libcap
     go
     gopls
     gcc
@@ -50,8 +50,7 @@
     cargo
     rustc
     rustfmt
-    python
-    conda
+    python3
     nodePackages.pyright
     isort
     black
@@ -59,12 +58,9 @@
     lua-language-server
     stylua
     # javascript
+    nodePackages_latest.typescript-language-server
     prettierd
-    typescript
     nodejs_20
-    # make
-    gnumake
-    cmake
   ];
 
   home.sessionVariables = {
@@ -98,8 +94,12 @@
   programs.fish = {
     enable = true;
     shellInit = ''
-      source "$HOME/.nix-profile/etc/profile.d/nix.fish"
+# nix
+      . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
+      source /nix/var/nix/profiles/default/etc/profile.d/nix.fish
       source "$HOME/.nix-profile/share/asdf-vm/asdf.fish"
+# brew
+      fish_add_path /opt/homebrew/bin
     '';
     shellAliases = {
       ls = "exa --color=always --icons --group-directories-first";
