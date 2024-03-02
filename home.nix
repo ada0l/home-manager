@@ -13,23 +13,32 @@
     docker
 
     # misc
+    wireguard-tools
+    bat
     curl
+    grpcurl
     wget
     htop
     zip
     unzip
     git
+    gh
+    gitui
     ranger
     fish
     zellij
     eza
     jq
-    
+    fzf
+    zsh
+    oh-my-zsh
+
     # search and replacing
     ripgrep
     fd
+    gnused
     sd
- 
+
     # editors
     neovim
     helix
@@ -46,6 +55,10 @@
     go
     gopls
     gcc
+    delve
+    impl
+    gotests
+    go-swagger
     # rust
     cargo
     rustc
@@ -61,6 +74,9 @@
     nodePackages_latest.typescript-language-server
     prettierd
     nodejs_20
+
+    # for ruby
+    libyaml
   ];
 
   home.sessionVariables = {
@@ -100,6 +116,15 @@
       source "$HOME/.nix-profile/share/asdf-vm/asdf.fish"
 # brew
       fish_add_path /opt/homebrew/bin
+
+function envsource
+  for line in (cat $argv | grep -v '^#')
+    set item (string split -m 1 '=' $line)
+    set -gx $item[1] $item[2]
+    echo "Exported key $item[1]"
+  end
+end
+    alias gsed="gnused"
     '';
     shellAliases = {
       ls = "exa --color=always --icons --group-directories-first";
@@ -118,4 +143,31 @@
     };
   };
 
+  programs.zsh = {
+    enable = true;
+    initExtraFirst = ''
+      # nix
+      . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+      source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
+      source "$HOME/.nix-profile/share/asdf-vm/asdf.sh"
+    '';
+    oh-my-zsh = {
+        enable = true;
+        plugins = [ "git" "fzf" ];
+        theme = "robbyrussell";
+    };
+    shellAliases = {
+      ls = "exa --color=always --icons --group-directories-first";
+      la = "exa --color=always --icons --group-directories-first --all";
+      ll = "exa --color=always --icons --group-directories-first --all --long";
+      lg = "lazygit";
+      ld = "lazydocker";
+      g = "git";
+      ga = "git add";
+      glg = "git log --graph";
+      gds = "git diff --staged";
+      glo = "git log --pretty=format:'%C(Yellow)%h  %C(reset)%ad (%C(Green)%cr%C(reset))%x09 %C(Cyan)%an: %C(reset)%s'";
+      z = "zellij";
+    };
+  };
 }
