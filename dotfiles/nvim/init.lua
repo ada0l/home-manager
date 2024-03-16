@@ -1,20 +1,3 @@
---{{{ OVERRIDE NOTIFY
-local orig_notify = vim.notify
-local filter_notify = function(text, level, opts)
-  -- more specific to this case
-  if
-      type(text) == 'string'
-      and (string.find(text, 'get_query', 1, true) or string.find(text, 'get_node_text', 1, true))
-  then
-    -- for all deprecated and stack trace warnings
-    -- if type(text) == "string" and (string.find(text, ":help deprecated", 1, true) or string.find(text, "stack trace", 1, true)) then
-    return
-  end
-  orig_notify(text, level, opts)
-end
-vim.notify = filter_notify
---}}}
-
 --{{{ Functions
 local nmap_leader = function(suffix, rhs, desc, opts)
   opts = opts or {}
@@ -607,6 +590,20 @@ later(function()
     if arg == 'gsed' then return 1 end
     return _executable(arg)
   end
+  local orig_notify = vim.notify
+  local filter_notify = function(text, level, opts)
+    -- more specific to this case
+    if
+        type(text) == 'string'
+        and (string.find(text, 'get_query', 1, true) or string.find(text, 'get_node_text', 1, true))
+    then
+      -- for all deprecated and stack trace warnings
+      -- if type(text) == "string" and (string.find(text, ":help deprecated", 1, true) or string.find(text, "stack trace", 1, true)) then
+      return
+    end
+    orig_notify(text, level, opts)
+  end
+  vim.notify = filter_notify
 
   add({ source = 'nvim-pack/nvim-spectre', depends = { 'nvim-lua/plenary.nvim' } })
   require('spectre').setup({
