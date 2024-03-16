@@ -773,3 +773,14 @@ later(function()
   })
 end)
 --}}}
+
+--{{{ Copilot
+later(
+  function()
+    add('zbirenbaum/copilot.lua')
+    require("copilot").setup({})
+    add('zbirenbaum/copilot-cmp')
+    require("copilot_cmp").setup()
+  end
+)
+--}}}
