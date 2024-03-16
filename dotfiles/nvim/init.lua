@@ -251,6 +251,11 @@ vim.api.nvim_create_autocmd('BufLeave', {
   pattern = 'term://*',
   command = 'stopinsert',
 })
+
+vim.api.nvim_create_autocmd('TermClose', {
+  pattern = 'term://*/bin/zsh',
+  command = 'bd!',
+})
 --}}}
 
 --{{{ LSP
