@@ -581,6 +581,11 @@ later(function() require('mini.pairs').setup() end)
 later(function() require('mini.ai') end)
 
 later(function() require("mini.move") end)
+
+later(function()
+  add("bullets-vim/bullets.vim")
+  vim.g.bullets_enabled_file_types = { "markdown", "text", }
+end)
 --}}}
 
 --{{{ Replacing
