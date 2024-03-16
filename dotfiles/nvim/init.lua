@@ -573,8 +573,6 @@ later(
 
 later(function() require('mini.pairs').setup() end)
 
-later(function() require('mini.operators').setup() end)
-
 later(function() require('mini.ai') end)
 
 later(function() require("mini.move") end)
