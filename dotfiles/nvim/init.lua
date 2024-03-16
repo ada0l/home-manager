@@ -787,3 +787,31 @@ later(
   end
 )
 --}}}
+
+--{{{ Obsidian
+later(
+  function()
+    local transformator = function(filename)
+      if filename ~= nil and filename ~= '' then
+        return filename
+      end
+      return string.format('%d', os.time())
+    end
+    require("obsidian.lua.obsidian").setup({
+      vaults = {
+        {
+          dir = '/Users/ada0l/Library/Mobile Documents/iCloud~com~logseq~logseq/Documents/Personal/',
+          daily = {
+            dir = 'journals/',
+            format = '%Y_%m_%d',
+          },
+          note = {
+            dir = 'pages/',
+            transformator = transformator
+          },
+        }
+      }
+    })
+  end
+)
+--}}}
